@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: rate-limiter
+app:
+  rate-limits:
+    - url: /api/v1/orders
+      method: POST
+      initiator: lgorev
+      limit: 3
+    - url: /api/v1/orders
+      method: GET
+      initiator: lgorev
+      limit: 300
