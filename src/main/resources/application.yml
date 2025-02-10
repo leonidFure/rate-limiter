@@ -1,6 +1,13 @@
 spring:
   application:
     name: rate-limiter
+  cache:
+    type: redis
+  data:
+    redis:
+      username: default
+      password:
+      port: 7543
 app:
   rate-limits:
     - url: /api/v1/orders
