@@ -32,9 +32,9 @@ public class RateLimitFilter implements WebFilter {
         final var rateLimit = rateLimits.get(key);
         if (rateLimit != null) {
             log.info("Rate limit for key: {} is {}", key, rateLimit);
-            return redisExecutor.incrementWithTtl(key, 60)
+            return redisExecutor.incrementWithTtl(key, 10)
                     .flatMap(it -> {
-                        if (it >= rateLimit.limit()) {
+                        if (it > rateLimit.limit()) {
                             exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
                             return exchange.getResponse().setComplete();
                         }
